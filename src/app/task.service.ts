@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Task } from './task';
 
 @Injectable()
 export class TaskService {
-  lastId = 0;
-  tasks: Task[] = [];
+  lastId: number;
+  tasks: Task[];
 
-  constructor() { }
+  constructor(private ls: LocalStorageService) {
+    this.loadTasksFromStorage();
+  }
 
-  /*
-  * Имитируем метод POST при обращении к /tasks
-  * */
+  loadTasksFromStorage() {
+    this.tasks = this.ls.get('tasks')['items'] || [];
+    this.lastId = this.ls.get('tasks')['lastId'] || 0;
+  }
+
+  saveTasksToStorage() {
+    this.ls.set('tasks', {
+      'items': this.tasks,
+      'lastId': this.lastId
+    });
+  }
+
   addTask(task: Task): TaskService {
     if (!task.title) {
       return null;
@@ -18,52 +30,40 @@ export class TaskService {
     task.id = ++this.lastId;
     this.tasks.push(task);
     console.log('task added', task);
+    this.saveTasksToStorage();
     return this;
   }
 
-  /*
-   * Имитируем метод DELETE при обращении к /tasks/:id
-   * */
   deleteTaskById(id: number): TaskService {
-    this.tasks = this.tasks.filter( task => task.id !== id );
+    this.tasks = this.tasks.filter(task => task.id !== id);
     return this;
   }
 
-  /*
-   * Имитируем метод PUT при обращении к /tasks/:id
-   * */
   updateTask(id: number, values: Object = {}): Task {
-      const task = this.getTaskById( id );
+    const task = this.getTaskById(id);
 
-      if (!task) {
-        return null;
-      }
-
-      Object.assign(task, values);
-      console.log('task updated', task);
-      return task;
+    if (!task) {
+      return null;
     }
 
-    /*
-     * Имитируем метод GET при обращении к /tasks
-     * */
-    getAllTasks(): Task[] {
-      return this.tasks;
-    }
-
-    /*
-     * Имитируем метод GET при обращении к /tasks/:id
-     * */
-    getTaskById(id: number): Task {
-      return this.tasks.filter( task => task.id === id ).pop();
-    }
-
-    /*
-     * Изменить статус записи
-     * */
-    toggleTaskComplete(task: Task) {
-      return this.updateTask(task.id, {
-        complete: !task.complete
-      });
-    }
+    Object.assign(task, values);
+    console.log('task updated', task);
+    this.saveTasksToStorage();
+    return task;
   }
+
+  getAllTasks(): Task[] {
+    console.log('getAllTasks', this.tasks, this.ls.get('tasks'));
+    return this.tasks;
+  }
+
+  getTaskById(id: number): Task {
+    return this.tasks.filter(task => task.id === id).pop();
+  }
+
+  toggleTaskComplete(task: Task) {
+    return this.updateTask(task.id, {
+      complete: !task.complete
+    });
+  }
+}
