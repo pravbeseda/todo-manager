@@ -1,3 +1,26 @@
-<p>
-  task-edit works!
-</p>
+<form (ngSubmit)="onSubmit()" class="form-horizontal">
+  <input [(ngModel)]="task.id" [ngModelOptions]="{standalone: true}" type="hidden">
+  <div class="form-group">
+    <label for="inputTitle" class="col-sm-2 control-label">Название</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="task.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="inputTitle" placeholder="Название задачи">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputTitle" class="col-sm-2 control-label">Описание</label>
+    <div class="col-sm-10">
+      <textarea [(ngModel)]="task.description" [ngModelOptions]="{standalone: true}" class="form-control" rows="4" placeholder="Описание"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputDate" class="col-sm-2 control-label">Срок исполнения</label>
+    <div class="col-sm-10">
+      <input [(ngModel)]="task.date" [ngModelOptions]="{standalone: true}" type="date" class="form-control" id="inputDate">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Готово</button>
+    </div>
+  </div>
+</form>

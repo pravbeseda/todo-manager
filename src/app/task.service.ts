@@ -17,6 +17,7 @@ export class TaskService {
     }
     task.id = ++this.lastId;
     this.tasks.push(task);
+    console.log('task added', task);
     return this;
   }
 
@@ -31,7 +32,7 @@ export class TaskService {
   /*
    * Имитируем метод PUT при обращении к /tasks/:id
    * */
-  updateTaskById(id: number, values: Object = {}): Task {
+  updateTask(id: number, values: Object = {}): Task {
       const task = this.getTaskById( id );
 
       if (!task) {
@@ -39,7 +40,7 @@ export class TaskService {
       }
 
       Object.assign(task, values);
-
+      console.log('task updated', task);
       return task;
     }
 
@@ -61,7 +62,7 @@ export class TaskService {
      * Изменить статус записи
      * */
     toggleTaskComplete(task: Task) {
-      return this.updateTaskById(task.id, {
+      return this.updateTask(task.id, {
         complete: !task.complete
       });
     }

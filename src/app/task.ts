@@ -1,7 +1,7 @@
 export class Task {
   id: number;
   title = '';
-  desciption = '';
+  description = '';
   date: number;
   complete = false;
   constructor (values: Object = {}) {

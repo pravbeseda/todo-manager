@@ -14,25 +14,25 @@ describe('TaskService', () => {
   }));
 
   describe('#getAllTasks()', () => {
-      it('должен возвращать пустой массив по умолчанию', inject([TaskService], (service: TaskService) => {
-        expect(service.getAllTasks()).toEqual([]);
-      }) );
+    it('должен возвращать пустой массив по умолчанию', inject([TaskService], (service: TaskService) => {
+      expect(service.getAllTasks()).toEqual([]);
+    }));
 
-      it('должен возвращать все задачи', inject( [TaskService], (service: TaskService) => {
-        const task1 = new Task({
-          title: 'Задача 1',
-          complete: false
-        });
-        const task2 = new Task({
-          title: 'Задача 2',
-          complete: true
-        });
+    it('должен возвращать все задачи', inject([TaskService], (service: TaskService) => {
+      const task1 = new Task({
+        title: 'Задача 1',
+        complete: false
+      });
+      const task2 = new Task({
+        title: 'Задача 2',
+        complete: true
+      });
 
-        service.addTask(task1);
-        service.addTask(task2);
-        expect(service.getAllTasks()).toEqual([task1, task2]);
-      }));
-    });
+      service.addTask(task1);
+      service.addTask(task2);
+      expect(service.getAllTasks()).toEqual([task1, task2]);
+    }));
+  });
 
   describe('#addTask(task)', () => {
     it('должен автоматически назначать увеличенный Id', inject([TaskService], (service: TaskService) => {
@@ -45,12 +45,12 @@ describe('TaskService', () => {
         complete: false
       });
 
-        service.addTask(task1);
+      service.addTask(task1);
       service.addTask(task2);
 
       expect(service.getTaskById(1)).toEqual(task1);
       expect(service.getTaskById(2)).toEqual(task2);
-    }) );
+    }));
   });
 
   describe('#deleteTaskById(id)', () => {
@@ -73,8 +73,8 @@ describe('TaskService', () => {
       expect(service.getAllTasks()).toEqual([task2]);
       service.deleteTaskById(2);
 
-      expect( service.getAllTasks() ).toEqual([]);
-    }) );
+      expect(service.getAllTasks()).toEqual([]);
+    }));
 
     it('не должен ничего удалять, если task не найден по id', inject([TaskService], (service: TaskService) => {
       const task1 = new Task({
@@ -91,10 +91,10 @@ describe('TaskService', () => {
       expect(service.getAllTasks()).toEqual([task1, task2]);
       service.deleteTaskById(3);
       expect(service.getAllTasks()).toEqual([task1, task2]);
-    }) );
+    }));
   });
 
-  describe('#updateTaskById(id, values)', () => {
+  describe('#updateTask(id, values)', () => {
 
     it('должен изменять задачу по id и возвращать ее новый вариант', inject([TaskService], (service: TaskService) => {
       const task = new Task({
@@ -102,7 +102,7 @@ describe('TaskService', () => {
         complete: false
       });
       service.addTask(task);
-      const updatedTask = service.updateTaskById(1, {
+      const updatedTask = service.updateTask(1, {
         title: 'Новое название'
       });
 
@@ -115,7 +115,7 @@ describe('TaskService', () => {
         complete: false
       });
       service.addTask(task);
-      const updatedTask = service.updateTaskById(2, {
+      const updatedTask = service.updateTask(2, {
         title: 'новое название'
       });
 
@@ -136,7 +136,7 @@ describe('TaskService', () => {
       expect(updatedTask.complete).toEqual(true);
       service.toggleTaskComplete(task);
       expect(updatedTask.complete).toEqual(false);
-    }) );
+    }));
   });
 
 });
