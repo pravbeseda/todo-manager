@@ -34,9 +34,7 @@ const appRoutes: Routes = [
       prefix: 'task-manager',
       storageType: 'localStorage'
     }),
-    SortablejsModule.forRoot({
-      animation: 150
-    })
+    SortablejsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
