@@ -1,1 +1,1 @@
-ng build --prod --base-href "https://pravbeseda.github.io/todo-manager/"
+ng build --prod --base-href "/todo-manager/"
