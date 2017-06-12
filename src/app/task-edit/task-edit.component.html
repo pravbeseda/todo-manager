@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" class="form-horizontal">
+<form *ngIf="task" (ngSubmit)="onSubmit()" (ngCancel)="onCancel()" class="form-horizontal">
   <input [(ngModel)]="task.id" [ngModelOptions]="{standalone: true}" type="hidden">
   <div class="form-group">
     <label for="inputTitle" class="col-sm-2 control-label">Название</label>
@@ -21,6 +21,9 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-primary">Готово</button>
+      <button type="cancel" class="btn btn-default">Отмена</button>
     </div>
   </div>
 </form>
+
+<div *ngIf="task == undefined" class="alert alert-danger" role="alert" style="text-align: center">Задача не найдена!</div>

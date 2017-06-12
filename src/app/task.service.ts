@@ -53,11 +53,13 @@ export class TaskService {
   }
 
   getAllTasks(): Task[] {
-    console.log('getAllTasks', this.tasks, this.ls.get('tasks'));
     return this.tasks;
   }
 
   getTaskById(id: number): Task {
+    if (typeof(id) === 'string') {
+      id = parseInt(id, 10);
+    }
     return this.tasks.filter(task => task.id === id).pop();
   }
 

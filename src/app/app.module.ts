@@ -13,6 +13,7 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
 const appRoutes: Routes = [
   { path: '', component: TasksListComponent },
   { path: 'edit', component: TaskEditComponent },
+  { path: 'edit/:id', component: TaskEditComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

@@ -1,10 +1,10 @@
 <div style="text-align: center; padding-bottom: 20px;">
-  <a href="/edit/" class="btn btn-primary">Новая задача</a>
+  <a routerLink="/edit/" class="btn btn-primary">Новая задача</a>
 </div>
 
 <div *ngIf="tasks.length > 0" class="row">
   <li *ngFor="let task of tasks" [class.completed]="task.complete">
-    <label>{{task.title}}</label>
+    <a routerLink="./edit/{{task.id}}">{{task.title}}</a>
     <button class="destroy" (click)="removeTodo(task)"></button>
   </li>
 </div>
