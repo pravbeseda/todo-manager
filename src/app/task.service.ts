@@ -5,16 +5,19 @@ import { Task } from './task';
 
 @Injectable()
 export class TaskService {
-  lastId: number;
-  tasks: Task[];
+  lastId = 0;
+  tasks: Task[] = [];
 
   constructor(private ls: LocalStorageService) {
     this.loadTasksFromStorage();
   }
 
   loadTasksFromStorage() {
-    this.tasks = this.ls.get('tasks')['items'] || [];
-    this.lastId = this.ls.get('tasks')['lastId'] || 0;
+    const savedData: Object = this.ls.get('tasks');
+    if (savedData) {
+      this.tasks = savedData['items'] || [];
+      this.lastId = savedData['lastId'] || 0;
+    }
   }
 
   saveTasksToStorage() {
