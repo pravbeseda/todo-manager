@@ -16,7 +16,6 @@ export class TaskEditComponent implements OnInit {
 
   constructor(private taskService: TaskService, private router: Router, private activateRoute: ActivatedRoute) {
     this.id = activateRoute.snapshot.params['id'];
-    console.log('id', this.id);
     if (this.id) {
       this.task = taskService.getTaskById(this.id);
     } else {
@@ -28,7 +27,6 @@ export class TaskEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submit', this.task);
     if (this.task.id) {
       this.taskService.updateTask(this.task.id, this.task);
     } else {

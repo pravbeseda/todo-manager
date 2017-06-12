@@ -39,7 +39,6 @@ export class TaskService {
     }
     task.id = ++this.lastId;
     this.tasks.push(task);
-    console.log('task added', task);
     this.saveTasksToStorage();
     return this;
   }
@@ -61,7 +60,6 @@ export class TaskService {
     }
 
     Object.assign(task, values);
-    console.log('task updated', task);
     this.saveTasksToStorage();
     return task;
   }
@@ -88,7 +86,6 @@ export class TaskService {
       return false;
     }
     const days: number = moment(task.date).diff(moment(), 'days');
-    console.log('isExpired', days);
     return (days < 0);
   }
 
@@ -97,7 +94,6 @@ export class TaskService {
       return false;
     }
     const days: number = moment(task.date).diff(moment(), 'days');
-    console.log('isWarning', days);
     return (days <= 3 && days >= 0);
   }
 

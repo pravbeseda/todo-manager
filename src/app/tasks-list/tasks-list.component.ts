@@ -38,7 +38,6 @@ export class TasksListComponent implements OnInit {
   }
 
   onSorted() {
-    console.log('onSorted', this.tasks);
     this.taskService.updateTasks(this.tasks);
   }
 
