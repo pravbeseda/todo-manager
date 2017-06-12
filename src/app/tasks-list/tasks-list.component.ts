@@ -27,4 +27,12 @@ export class TasksListComponent implements OnInit {
     this.taskService.toggleTaskComplete(task);
   }
 
+  isExpired(task: Task) {
+    return this.taskService.isExpired(task);
+  }
+
+  isWarning(task: Task) {
+    return this.taskService.isWarning(task);
+  }
+
 }

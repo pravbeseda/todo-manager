@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
+import * as moment from 'moment';
 import { Task } from './task';
 
 @Injectable()
@@ -72,4 +73,23 @@ export class TaskService {
       complete: !task.complete
     });
   }
+
+  isExpired(task: Task) {
+    if (task.complete || !task.date || !moment(task.date).isValid()) {
+      return false;
+    }
+    const days: number = moment(task.date).diff(moment(), 'days');
+    console.log('isExpired', days);
+    return (days < 0);
+  }
+
+  isWarning(task: Task) {
+    if (task.complete || !task.date || !moment(task.date).isValid()) {
+      return false;
+    }
+    const days: number = moment(task.date).diff(moment(), 'days');
+    console.log('isWarning', days);
+    return (days < 3 && days >= 0);
+  }
+
 }

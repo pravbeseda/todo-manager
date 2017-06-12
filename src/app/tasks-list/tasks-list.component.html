@@ -3,12 +3,13 @@
 </div>
 
 <div *ngIf="tasks.length > 0" class="row">
-  <div *ngFor="let task of tasks" [class.completed]="task.complete" class="col-xs-12 col-md-12 task-item">
+  <div *ngFor="let task of tasks" [class.warning]="isWarning(task)" [class.expired]="isExpired(task)" [class.completed]="task.complete" class="col-xs-12 col-md-12 task-item">
     <div class="thumbnail" style="padding: 10px 10px 10px 50px;">
       <input type="checkbox" (click)="toggleTaskComplete(task)" [checked]="task.complete" class="toggle">
       <a routerLink="./edit/{{task.id}}" class="task-title">{{task.title}}</a>
       <a (click)="removeTask(task.id)" title="Удалить задачу" class="btn btn-sm btn-my-danger pull-right">X</a>
-      <div class="task-date">Срок: {{task.date || "не указан"}}</div>
+      <div *ngIf="task.date" class="task-date">Срок: {{task.date | date: 'dd.MM.yyyy'}}</div>
+      <div *ngIf="!task.date" class="task-date">Срок не указан</div>
     </div>
   </div>
 </div>
