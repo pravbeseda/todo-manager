@@ -27,10 +27,6 @@ export class TaskService {
     });
   }
 
-/**
- * Метод для изменения списка извне,
- * используется в обработчике события onUpdate Sortablejs
- */
   updateTasks(tasks: Task[]) {
     this.tasks = tasks;
     this.saveTasksToStorage();
@@ -50,8 +46,7 @@ export class TaskService {
     if (typeof(id) === 'string') {
       id = parseInt(id, 10);
     }
-    this.tasks = this.tasks.filter(task => task.id !== id);
-    this.saveTasksToStorage();
+    this.updateTasks(this.tasks.filter(task => task.id !== id));
     return this;
   }
 

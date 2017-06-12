@@ -11,14 +11,18 @@ import { Task } from '../task';
   providers: [TaskService]
 })
 export class TasksListComponent implements OnInit {
-  tasks: Task[];
+  _tasks: Task[];
 
   constructor(private taskService: TaskService) {
   }
 
   ngOnInit() {
     moment.locale('ru');
-    this.tasks = this.taskService.getAllTasks();
+  }
+
+  get tasks() {
+    this._tasks = this.taskService.getAllTasks();
+    return this._tasks;
   }
 
   removeTask(id: number) {
@@ -38,7 +42,7 @@ export class TasksListComponent implements OnInit {
   }
 
   onSorted() {
-    this.taskService.updateTasks(this.tasks);
+    this.taskService.updateTasks(this._tasks);
   }
 
   dateDiff(date) {
