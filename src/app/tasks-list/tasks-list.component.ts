@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
+import { Task } from '../task';
 
 @Component({
   selector: 'app-tasks-list',
@@ -16,6 +17,14 @@ export class TasksListComponent implements OnInit {
 
   get tasks() {
     return this.taskService.getAllTasks();
+  }
+
+  removeTask(id: number) {
+    this.taskService.deleteTaskById(id);
+  }
+
+  toggleTaskComplete(task: Task) {
+    this.taskService.toggleTaskComplete(task);
   }
 
 }

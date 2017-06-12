@@ -35,7 +35,11 @@ export class TaskService {
   }
 
   deleteTaskById(id: number): TaskService {
+    if (typeof(id) === 'string') {
+      id = parseInt(id, 10);
+    }
     this.tasks = this.tasks.filter(task => task.id !== id);
+    this.saveTasksToStorage();
     return this;
   }
 
