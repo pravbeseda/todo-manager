@@ -98,7 +98,7 @@ export class TaskService {
     }
     const days: number = moment(task.date).diff(moment(), 'days');
     console.log('isWarning', days);
-    return (days < 3 && days >= 0);
+    return (days <= 3 && days >= 0);
   }
 
 }

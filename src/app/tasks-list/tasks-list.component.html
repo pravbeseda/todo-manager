@@ -8,7 +8,7 @@
       <input type="checkbox" (click)="toggleTaskComplete(task)" [checked]="task.complete" class="toggle">
       <a routerLink="./edit/{{task.id}}" class="task-title">{{task.title}}</a>
       <a (click)="removeTask(task.id)" title="Удалить задачу" class="btn btn-sm btn-my-danger pull-right">X</a>
-      <div *ngIf="task.date" class="task-date">Срок: {{task.date | date: 'dd.MM.yyyy'}}</div>
+      <div *ngIf="task.date" class="task-date">Срок: {{task.date | date: 'dd.MM.yyyy'}} ({{dateDiff(task.date)}})</div>
       <div *ngIf="!task.date" class="task-date">Срок не указан</div>
     </div>
   </div>

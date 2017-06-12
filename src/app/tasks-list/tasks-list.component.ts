@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SortablejsOptions } from 'angular-sortablejs';
+import * as moment from 'moment';
 import { TaskService } from '../task.service';
 import { Task } from '../task';
 
@@ -16,6 +17,7 @@ export class TasksListComponent implements OnInit {
   }
 
   ngOnInit() {
+    moment.locale('ru');
     this.tasks = this.taskService.getAllTasks();
   }
 
@@ -38,6 +40,10 @@ export class TasksListComponent implements OnInit {
   onSorted() {
     console.log('onSorted', this.tasks);
     this.taskService.updateTasks(this.tasks);
+  }
+
+  dateDiff(date) {
+    return moment(date).fromNow();
   }
 
 }
