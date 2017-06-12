@@ -2,7 +2,7 @@
   <a routerLink="/edit/" class="btn btn-primary">Новая задача</a>
 </div>
 
-<div *ngIf="tasks.length > 0" class="row">
+<div *ngIf="tasks.length > 0" [sortablejs]="tasks" [sortablejsOptions]="{ onUpdate: onSorted() }" class="row">
   <div *ngFor="let task of tasks" [class.warning]="isWarning(task)" [class.expired]="isExpired(task)" [class.completed]="task.complete" class="col-xs-12 col-md-12 task-item">
     <div class="thumbnail" style="padding: 10px 10px 10px 50px;">
       <input type="checkbox" (click)="toggleTaskComplete(task)" [checked]="task.complete" class="toggle">

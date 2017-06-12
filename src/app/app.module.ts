@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { SortablejsModule } from 'angular-sortablejs';
 import * as moment from 'moment';
 
 import { AppComponent } from './app.component';
@@ -23,7 +24,7 @@ const appRoutes: Routes = [
     AppComponent,
     TaskEditComponent,
     NotFoundComponent,
-    TasksListComponent
+    TasksListComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +33,9 @@ const appRoutes: Routes = [
     LocalStorageModule.withConfig({
       prefix: 'task-manager',
       storageType: 'localStorage'
+    }),
+    SortablejsModule.forRoot({
+      animation: 150
     })
   ],
   providers: [],

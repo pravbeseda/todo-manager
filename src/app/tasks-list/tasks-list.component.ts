@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SortablejsOptions } from 'angular-sortablejs';
 import { TaskService } from '../task.service';
 import { Task } from '../task';
 
@@ -9,14 +10,13 @@ import { Task } from '../task';
   providers: [TaskService]
 })
 export class TasksListComponent implements OnInit {
+  tasks: Task[];
 
-  constructor(private taskService: TaskService) { }
-
-  ngOnInit() {
+  constructor(private taskService: TaskService) {
   }
 
-  get tasks() {
-    return this.taskService.getAllTasks();
+  ngOnInit() {
+    this.tasks = this.taskService.getAllTasks();
   }
 
   removeTask(id: number) {
@@ -33,6 +33,11 @@ export class TasksListComponent implements OnInit {
 
   isWarning(task: Task) {
     return this.taskService.isWarning(task);
+  }
+
+  onSorted() {
+    console.log('onSorted', this.tasks);
+    this.taskService.updateTasks(this.tasks);
   }
 
 }

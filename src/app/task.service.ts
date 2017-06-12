@@ -24,6 +24,15 @@ export class TaskService {
     });
   }
 
+/**
+ * Метод для изменения списка извне,
+ * используется в обработчике события onUpdate Sortablejs
+ */
+  updateTasks(tasks: Task[]) {
+    this.tasks = tasks;
+    this.saveTasksToStorage();
+  }
+
   addTask(task: Task): TaskService {
     if (!task.title) {
       return null;
